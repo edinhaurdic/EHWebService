@@ -1,5 +1,6 @@
 package com.example.ehwebservice.service;
 
+import com.example.ehwebservice.dto.Posts;
 import com.example.ehwebservice.entities.Users;
 import com.example.ehwebservice.repo.UsersRepo;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,14 @@ public class UsersService {
                 .uri("/users/" + id)
                 .exchangeToMono(user -> user.bodyToMono(Users.class))
                 .block();
+    }
+
+    public Posts findUserByUserId(int userId){
+        return webClient
+                .get()
+                .uri("/users/"+userId+"/posts")
+                .exchangeToFlux(clientResponse -> clientResponse.bodyToFlux(Posts.class))
+                .blockLast();
     }
 
     public List<Users> findUsers(){

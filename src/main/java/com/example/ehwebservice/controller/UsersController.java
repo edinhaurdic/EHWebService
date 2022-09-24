@@ -1,5 +1,6 @@
 package com.example.ehwebservice.controller;
 
+import com.example.ehwebservice.dto.Posts;
 import com.example.ehwebservice.entities.Users;
 import com.example.ehwebservice.service.UsersService;
 import org.springframework.web.bind.annotation.*;
@@ -21,9 +22,13 @@ public class UsersController {
         return usersService.findUsers();
     }
 
-    @GetMapping("/{id}")
-    public Users findUserById(@PathVariable int id){
-        return usersService.findUserById(id);
+       @GetMapping("/{id}")
+        public Users findUserById(@PathVariable int id){
+            return usersService.findUserById(id);
+        }
+    @GetMapping("/{userId}/posts")
+    public Posts findUserByUserId(@PathVariable int userId){
+        return usersService.findUserByUserId(userId);
     }
 
     @PostMapping
