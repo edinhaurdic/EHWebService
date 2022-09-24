@@ -27,11 +27,12 @@ public class UsersService {
                 .block();
     }
 
-    public Posts findUserByUserId(int userId){
+    public List<Posts> findUserByUserId(int userId){
         return webClient
                 .get()
                 .uri("/users/"+userId+"/posts")
                 .exchangeToFlux(clientResponse -> clientResponse.bodyToFlux(Posts.class))
+                .buffer()
                 .blockLast();
     }
 

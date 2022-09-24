@@ -27,7 +27,7 @@ public class UsersController {
             return usersService.findUserById(id);
         }
     @GetMapping("/{userId}/posts")
-    public Posts findUserByUserId(@PathVariable int userId){
+    public List<Posts> findUserByUserId(@PathVariable int userId){
         return usersService.findUserByUserId(userId);
     }
 
