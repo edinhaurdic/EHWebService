@@ -24,11 +24,7 @@ public class UsersService {
     }
 
     public Users findUserById(int id) {
-        return webClient
-                .get()
-                .uri("/users/" + id)
-                .exchangeToMono(user -> user.bodyToMono(Users.class))
-                .block();
+        return usersRepo.findUserById(id);
     }
 
     public List<Posts> findUserByUserId(int userId){
@@ -61,5 +57,10 @@ public class UsersService {
         }
         Users createdUsers= usersRepo.save(existingUser);
         return new Users(createdUsers.getUsername());
+    }
+
+    public void delete(int id) {
+        usersRepo.deleteById(id);
+
     }
 }

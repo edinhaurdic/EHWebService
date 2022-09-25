@@ -1,7 +1,7 @@
 package com.example.ehwebservice.controller;
 
 import com.example.ehwebservice.dto.Posts;
-//import com.example.ehwebservice.dto.User;
+
 import com.example.ehwebservice.dto.UsersRecord;
 import com.example.ehwebservice.entities.Users;
 import com.example.ehwebservice.service.UsersService;
@@ -20,7 +20,7 @@ public class UsersController {
     }
 
     @GetMapping
-    public List<Users> findUsers(){
+    public List<Users> findAll(){
         return usersService.findUsers();
     }
 
@@ -47,7 +47,9 @@ public class UsersController {
     }
 
     @DeleteMapping("/{id}")
-    public Users deleteUsers(@PathVariable("id") int id){
-        return usersService.findUserById(id);
+    private void deleteUser(@PathVariable int id){
+        usersService.delete(id);
+        }
     }
-}
+
+
