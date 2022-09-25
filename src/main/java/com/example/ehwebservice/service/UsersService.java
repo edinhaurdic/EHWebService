@@ -1,11 +1,15 @@
 package com.example.ehwebservice.service;
 
 import com.example.ehwebservice.dto.Posts;
+//import com.example.ehwebservice.dto.User;
+import com.example.ehwebservice.dto.UsersRecord;
 import com.example.ehwebservice.entities.Users;
 import com.example.ehwebservice.repo.UsersRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import javax.swing.text.html.HTMLDocument;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -44,5 +48,18 @@ public class UsersService {
         return usersRepo.save(users);
     }
 
+    public Users deleteUsers(Users users) {
+        usersRepo.delete(usersRepo.getById(users.getId()));
+        return deleteUsers(users);
+    }
 
+    public Users updateUsers(int id, UsersRecord usersRecord) {
+        Users existingUser = usersRepo.findById(id).orElseThrow();
+
+        if (usersRecord.username() !=null){
+            existingUser.setUsername(usersRecord.username());
+        }
+        Users createdUsers= usersRepo.save(existingUser);
+        return new Users(createdUsers.getUsername());
+    }
 }

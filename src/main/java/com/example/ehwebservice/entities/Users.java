@@ -31,6 +31,10 @@ public class Users {
         this.username = username;
     }
 
+    public Users(String username) {
+        this.username = username;
+    }
+
     @Override
     public String toString() {
         return "AppUser{" +

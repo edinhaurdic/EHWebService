@@ -1,6 +1,8 @@
 package com.example.ehwebservice.controller;
 
 import com.example.ehwebservice.dto.Posts;
+//import com.example.ehwebservice.dto.User;
+import com.example.ehwebservice.dto.UsersRecord;
 import com.example.ehwebservice.entities.Users;
 import com.example.ehwebservice.service.UsersService;
 import org.springframework.web.bind.annotation.*;
@@ -36,4 +38,16 @@ public class UsersController {
         return usersService.insertUsers(users);
     }
 
+    @PatchMapping("/{id}")
+    public Users updateUsers(
+            @PathVariable int id,
+            @RequestBody UsersRecord usersRecord
+            ){
+        return usersService.updateUsers(id, usersRecord);
+    }
+
+    @DeleteMapping("/{id}")
+    public Users deleteUsers(@PathVariable("id") int id){
+        return usersService.findUserById(id);
+    }
 }
